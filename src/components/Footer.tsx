@@ -66,13 +66,18 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white/55 hover:text-white font-medium transition-colors text-sm">
+                <a href="/privacy-policy" className="text-white/55 hover:text-white font-medium transition-colors text-sm">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white/55 hover:text-white font-medium transition-colors text-sm">
-                  Terms of Service
+                <a href="/terms-and-conditions" className="text-white/55 hover:text-white font-medium transition-colors text-sm">
+                  Terms &amp; Conditions
+                </a>
+              </li>
+              <li>
+                <a href="/cookie-policy" className="text-white/55 hover:text-white font-medium transition-colors text-sm">
+                  Cookie Policy
                 </a>
               </li>
             </ul>
