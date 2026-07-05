@@ -1,11 +1,24 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
+import { useEffect } from 'react';
 import Home from '@/pages/Home';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import TermsAndConditions from '@/pages/TermsAndConditions';
 import CookiePolicy from '@/pages/CookiePolicy';
 
 const queryClient = new QueryClient();
+
+// Initialize Termly for SPA to handle dynamically rendered elements
+function TermlyInitializer() {
+  useEffect(() => {
+    // Termly's resource-blocker script provides a consentLanguage object that handles SPA reinitializations
+    if (window.consentLanguage) {
+      window.consentLanguage.runScripts();
+    }
+  }, []);
+
+  return null;
+}
 
 function NotFound() {
   return (
@@ -34,6 +47,7 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <TermlyInitializer />
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
         <Router />
       </WouterRouter>
