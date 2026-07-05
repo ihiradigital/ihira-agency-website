@@ -81,7 +81,11 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="termly-display-preferences text-white/55 hover:text-white font-medium transition-colors text-sm">
+                <a 
+                  href="#" 
+                  className="termly-display-preferences text-white/55 hover:text-white font-medium transition-colors text-sm"
+                  onClick={(e) => e.preventDefault()}
+                >
                   Cookie Preferences
                 </a>
               </li>
