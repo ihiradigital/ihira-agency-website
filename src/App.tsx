@@ -11,10 +11,37 @@ const queryClient = new QueryClient();
 // Initialize Termly for SPA to handle dynamically rendered elements
 function TermlyInitializer() {
   useEffect(() => {
-    // Termly's resource-blocker script provides a consentLanguage object that handles SPA reinitializations
-    if (window.consentLanguage) {
-      window.consentLanguage.runScripts();
-    }
+    // For Termly resource-blocker in SPA, we need to scan for elements with termly-display-preferences class
+    // and manually attach click handlers since they're rendered after Termly initializes
+    const handlePreferencesClick = (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Try to find and trigger the preferences modal through various Termly APIs
+      // The resource-blocker script may expose different APIs depending on implementation
+      if ((window as any).__TERMLY__?.displayPreferences) {
+        (window as any).__TERMLY__.displayPreferences();
+      } else if ((window as any).displayPreferencesModal) {
+        (window as any).displayPreferencesModal();
+      } else {
+        // As fallback, dispatch a custom event that Termly might be listening for
+        const event = new CustomEvent('termly:openPreferences');
+        window.dispatchEvent(event);
+      }
+    };
+    
+    const prefsButtons = document.querySelectorAll('.termly-display-preferences');
+    prefsButtons.forEach(btn => {
+      btn.removeEventListener('click', handlePreferencesClick as EventListener);
+      btn.addEventListener('click', handlePreferencesClick as EventListener);
+    });
+    
+    // Clean up
+    return () => {
+      prefsButtons.forEach(btn => {
+        btn.removeEventListener('click', handlePreferencesClick as EventListener);
+      });
+    };
   }, []);
 
   return null;
