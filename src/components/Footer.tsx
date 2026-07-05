@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL || 'https://calendly.com/ihiradigital/free-website-strategy-call';
 
 export function Footer() {
+  useEffect(() => {
+    // Handle Termly preference center for footer button
+    const prefsButton = document.querySelector('.termly-display-preferences');
+    if (prefsButton) {
+      prefsButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Call Termly's API to display preferences modal
+        if (window.displayPreferencesModal) {
+          window.displayPreferencesModal();
+        }
+      });
+    }
+  }, []);
   return (
     <footer className="bg-[#0A0A0A] text-white pt-20 pb-10 border-t border-white/8">
       <div className="container mx-auto px-6">
