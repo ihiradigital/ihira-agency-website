@@ -84,12 +84,6 @@ export function Footer() {
                 <button
                   type="button"
                   className="termly-display-preferences text-white/55 hover:text-white font-medium transition-colors text-sm bg-transparent border-none cursor-pointer p-0"
-                  onClick={() => {
-                    // Trigger Termly preference center using the resource-blocker API
-                    if (window.top?.Termly?.showPreferencesModal) {
-                      window.top.Termly.showPreferencesModal();
-                    }
-                  }}
                 >
                   Cookie Preferences
                 </button>
