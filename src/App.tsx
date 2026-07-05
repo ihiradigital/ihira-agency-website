@@ -1,11 +1,30 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
+import { useEffect } from 'react';
 import Home from '@/pages/Home';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import TermsAndConditions from '@/pages/TermsAndConditions';
 import CookiePolicy from '@/pages/CookiePolicy';
 
 const queryClient = new QueryClient();
+
+// Initialize Termly for SPA to handle dynamically rendered elements
+function TermlyInitializer() {
+  useEffect(() => {
+    // Attach click handler to footer Cookie Preferences button
+    // The button has class termly-display-preferences but Termly's auto-binding
+    // doesn't work with React's dynamically rendered elements
+    const prefsButton = document.querySelector('.termly-display-preferences');
+    if (prefsButton && typeof window.displayPreferenceModal === 'function') {
+      prefsButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.displayPreferenceModal();
+      });
+    }
+  }, []);
+
+  return null;
+}
 
 function NotFound() {
   return (
@@ -34,6 +53,7 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <TermlyInitializer />
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
         <Router />
       </WouterRouter>

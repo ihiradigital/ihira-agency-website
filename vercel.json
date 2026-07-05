@@ -3,11 +3,11 @@
   "buildCommand": "vite build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!_next|api|assets).*)",
       "destination": "/index.html"
     }
   ],

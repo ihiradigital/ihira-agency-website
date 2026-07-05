@@ -80,6 +80,14 @@ export function Footer() {
                   Cookie Policy
                 </a>
               </li>
+              <li>
+                <button
+                  type="button"
+                  className="termly-display-preferences text-white/55 hover:text-white font-medium transition-colors text-sm bg-transparent border-none cursor-pointer p-0"
+                >
+                  Cookie Preferences
+                </button>
+              </li>
             </ul>
           </div>
         </div>
