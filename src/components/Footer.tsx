@@ -81,18 +81,12 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a 
-                  href="#" 
-                  className="termly-display-preferences text-white/55 hover:text-white font-medium transition-colors text-sm"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (window.displayPreferencesModal) {
-                      window.displayPreferencesModal();
-                    }
-                  }}
+                <button
+                  type="button"
+                  className="termly-display-preferences text-white/55 hover:text-white font-medium transition-colors text-sm bg-transparent border-none cursor-pointer p-0"
                 >
                   Cookie Preferences
-                </a>
+                </button>
               </li>
             </ul>
           </div>
