@@ -1,18 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL || 'https://calendly.com/ihiradigital/free-website-strategy-call';
 
 export function Footer() {
-  useEffect(() => {
-    // Reinitialize Termly event handlers for dynamically rendered button
-    // The Termly resource-blocker script scans for termly-display-preferences class
-    // but since React renders after Termly loads, we need to reinitialize
-    if (window.Termly) {
-      // Termly's resource-blocker scans for the class and sets up handlers automatically
-      // Force a scan of newly rendered elements
-      window.Termly.run();
-    }
-  }, []);
   return (
     <footer className="bg-[#0A0A0A] text-white pt-20 pb-10 border-t border-white/8">
       <div className="container mx-auto px-6">
