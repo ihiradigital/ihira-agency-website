@@ -4,16 +4,13 @@ const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL || 'https://calendly.com/
 
 export function Footer() {
   useEffect(() => {
-    // Handle Termly preference center for footer button
-    const prefsButton = document.querySelector('.termly-display-preferences');
-    if (prefsButton) {
-      prefsButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        // Call Termly's API to display preferences modal
-        if (window.displayPreferencesModal) {
-          window.displayPreferencesModal();
-        }
-      });
+    // Reinitialize Termly event handlers for dynamically rendered button
+    // The Termly resource-blocker script scans for termly-display-preferences class
+    // but since React renders after Termly loads, we need to reinitialize
+    if (window.Termly) {
+      // Termly's resource-blocker scans for the class and sets up handlers automatically
+      // Force a scan of newly rendered elements
+      window.Termly.run();
     }
   }, []);
   return (
