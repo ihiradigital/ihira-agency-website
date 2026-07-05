@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
+import { Analytics } from '@vercel/analytics/react';
 import Home from '@/pages/Home';
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ function App() {
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
         <Router />
       </WouterRouter>
+      <Analytics />
     </QueryClientProvider>
   );
 }
