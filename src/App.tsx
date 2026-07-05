@@ -11,9 +11,15 @@ const queryClient = new QueryClient();
 // Initialize Termly for SPA to handle dynamically rendered elements
 function TermlyInitializer() {
   useEffect(() => {
-    // Termly's resource-blocker script provides a consentLanguage object that handles SPA reinitializations
-    if (window.consentLanguage) {
-      window.consentLanguage.runScripts();
+    // Attach click handler to footer Cookie Preferences button
+    // The button has class termly-display-preferences but Termly's auto-binding
+    // doesn't work with React's dynamically rendered elements
+    const prefsButton = document.querySelector('.termly-display-preferences');
+    if (prefsButton && typeof window.displayPreferenceModal === 'function') {
+      prefsButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.displayPreferenceModal();
+      });
     }
   }, []);
 
